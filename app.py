@@ -4,7 +4,7 @@ import streamlit as st
 
 
 # Título y descripción
-st.title("Simulaciones CFD con OpenFOAM 💨")
+st.title("Simulaciones CFD con OpenFOAM ")
 st.write("Visualización interactiva de resultados de investigación en dinámica de fluidos.")
 
 # Sección para el primer video
@@ -21,8 +21,8 @@ st.info("Explora los diferentes modelos de turbulencia y velocidades.")
 modelos_videos = {
     "Modelo k-epsilon - Velocidad Baja": "epsilon 10.mp4",
     "Modelo k-epsilon - Velocidad Alta": "epsilon 18.mp4",
-    "Modelo k-omega SST - Velocidad Baja": "omega 10.mp4",
-    "Modelo k-omega SST - Velocidad Alta": "omega 18.mp4"
+    "Modelo k-omega - Velocidad Baja": "omega 10.mp4",
+    "Modelo k-omega - Velocidad Alta": "omega 18.mp4"
 }
 
 # 2. Creamos el menú desplegable en la interfaz
