@@ -3,6 +3,20 @@ import streamlit as st
 # Configuración básica
 st.set_page_config(page_title="Investigación OpenFOAM", layout="wide")
 
+# --- NUEVA SECCIÓN DE LOGOS ---
+# Creamos tres columnas: las de los extremos (tamaño 1) para los logos, 
+# y una muy ancha en el centro (tamaño 4) para separarlos.
+col_logo1, col_espacio, col_logo2 = st.columns([1, 4, 1])
+
+with col_logo1:
+    # Asegúrate de poner el nombre exacto de tu imagen de la UTN
+    st.image("logo UTNFRM.png", use_container_width=True)
+
+with col_logo2:
+    # Asegúrate de poner el nombre exacto de tu imagen del IEMI
+    st.image("Logo Iemi.png", use_container_width=True)
+# ------------------------------
+
 st.title("Simulaciones CFD con OpenFOAM ")
 st.write("Visualización interactiva de resultados de investigación en dinámica de fluidos.")
 
