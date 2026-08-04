@@ -1,36 +1,48 @@
 import streamlit as st
 
-# Configuración básica de la página
+# Configuración básica
+st.set_page_config(page_title="Investigación OpenFOAM", layout="wide")
 
-
-# Título y descripción
 st.title("Simulaciones CFD con OpenFOAM ")
 st.write("Visualización interactiva de resultados de investigación en dinámica de fluidos.")
 
-# Sección para el primer video
+# 1. Creamos la casilla de verificación
+modo_comparacion = st.checkbox("Activar modo de comparación simultánea")
 
-# Código preparado para cuando tengamos el video:
-import streamlit as st
+st.divider() # Agrega una línea horizontal para separar secciones visualmente
 
-st.set_page_config(page_title="Investigación OpenFOAM", layout="wide")
+# 2. Lógica para decidir qué mostrar
+if modo_comparacion:
+    # Si la casilla ESTÁ marcada, mostramos las dos columnas
+    st.header("Comparación de Modelos de Turbulencia")
+    st.info("Comparativa directa entre los modelos para altas velocidades.")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("Modelo k-epsilon")
+        st.video("epsilon_alta.mp4") # Reemplaza con tus nombres reales
+        
+    with col2:
+        st.subheader("Modelo k-omega SST")
+        st.video("omega_alta.mp4") # Reemplaza con tus nombres reales
 
-st.info("Explora los diferentes modelos de turbulencia y velocidades.")
-
-# 1. Creamos un diccionario para validar las opciones y mapearlas a los archivos
-# (Asegúrate de que estos archivos .mp4 existan en tu carpeta)
-modelos_videos = {
-    "Modelo k-epsilon - Velocidad Baja": "epsilon 10.mp4",
-    "Modelo k-epsilon - Velocidad Alta": "epsilon 18.mp4",
-    "Modelo k-omega - Velocidad Baja": "omega 10.mp4",
-    "Modelo k-omega - Velocidad Alta": "omega 18.mp4"
-}
-
-# 2. Creamos el menú desplegable en la interfaz
-opcion_seleccionada = st.selectbox(
-    "Selecciona el modelo y condición a visualizar:",
-    list(modelos_videos.keys())
-)
-
-# 3. Llamamos al video que corresponde a la selección
-archivo_a_mostrar = modelos_videos[opcion_seleccionada]
-st.video(archivo_a_mostrar)
+else:
+    # Si la casilla NO está marcada, mostramos la vista individual
+    st.header("Visualización Individual")
+    
+    # Diccionario con las opciones
+    modelos_videos = {
+        "Modelo k-epsilon - Velocidad Baja": "epsilon 10.mp4",
+        "Modelo k-epsilon - Velocidad Alta": "epsilon 18.mp4",
+        "Modelo k-omega - Velocidad Baja": "omega 10.mp4",
+        "Modelo k-omega - Velocidad Alta": "omega 18.mp4"
+    }
+    
+    opcion_seleccionada = st.selectbox(
+        "Selecciona el modelo y condición a visualizar:",
+        list(modelos_videos.keys())
+    )
+    
+    archivo_a_mostrar = modelos_videos[opcion_seleccionada]
+    st.video(archivo_a_mostrar)
