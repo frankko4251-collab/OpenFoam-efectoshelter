@@ -21,11 +21,11 @@ if modo_comparacion:
     
     with col1:
         st.subheader("Modelo k-epsilon")
-        st.video("epsilon_alta.mp4") # Reemplaza con tus nombres reales
+        st.video("epsilon 18.mp4") # Reemplaza con tus nombres reales
         
     with col2:
-        st.subheader("Modelo k-omega SST")
-        st.video("omega_alta.mp4") # Reemplaza con tus nombres reales
+        st.subheader("Modelo k-omega")
+        st.video("omega 18.mp4") # Reemplaza con tus nombres reales
 
 else:
     # Si la casilla NO está marcada, mostramos la vista individual
