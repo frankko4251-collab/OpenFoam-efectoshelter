@@ -35,11 +35,11 @@ if modo_comparacion:
     
     with col1:
         st.subheader("Modelo k-epsilon")
-        st.video("epsilon 18.mp4") # Reemplaza con tus nombres reales
+        st.video("epsilon 18_2.mp4") # Reemplaza con tus nombres reales
         
     with col2:
         st.subheader("Modelo k-omega")
-        st.video("omega 18.mp4") # Reemplaza con tus nombres reales
+        st.video("omega 18_2.mp4") # Reemplaza con tus nombres reales
 
 else:
     # Si la casilla NO está marcada, mostramos la vista individual
@@ -47,10 +47,10 @@ else:
     
     # Diccionario con las opciones
     modelos_videos = {
-        "Modelo k-epsilon - Velocidad Baja": "epsilon 10.mp4",
-        "Modelo k-epsilon - Velocidad Alta": "epsilon 18.mp4",
-        "Modelo k-omega - Velocidad Baja": "omega 10.mp4",
-        "Modelo k-omega - Velocidad Alta": "omega 18.mp4"
+        "Modelo k-epsilon - Velocidad Baja": "epsilon 10_2.mp4",
+        "Modelo k-epsilon - Velocidad Alta": "epsilon 18_2.mp4",
+        "Modelo k-omega - Velocidad Baja": "omega 10_2.mp4",
+        "Modelo k-omega - Velocidad Alta": "omega 18_2.mp4"
     }
     
     opcion_seleccionada = st.selectbox(
