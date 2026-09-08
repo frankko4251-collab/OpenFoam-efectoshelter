@@ -39,7 +39,7 @@ if modo_comparacion:
         
     with col2:
         st.subheader("Modelo k-omega")
-        st.video("omega 18_2.mp4") # Reemplaza con tus nombres reales
+        st.video("omega18_2.mp4") # Reemplaza con tus nombres reales
 
 else:
     # Si la casilla NO está marcada, mostramos la vista individual
