@@ -50,7 +50,7 @@ else:
         "Modelo k-epsilon - Velocidad Baja": "epsilon 10_2.mp4",
         "Modelo k-epsilon - Velocidad Alta": "epsilon 18_2.mp4",
         "Modelo k-omega - Velocidad Baja": "omega 10_2.mp4",
-        "Modelo k-omega - Velocidad Alta": "omega 18_2.mp4"
+        "Modelo k-omega - Velocidad Alta": "omega18_2.mp4"
     }
     
     opcion_seleccionada = st.selectbox(
