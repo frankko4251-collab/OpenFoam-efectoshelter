@@ -27,24 +27,17 @@ st.divider() # Agrega una línea horizontal para separar secciones visualmente
 
 # 2. Lógica para decidir qué mostrar
 if modo_comparacion:
-    # Si la casilla ESTÁ marcada, mostramos las dos columnas
+    # Si la casilla ESTÁ marcada, mostramos el video unificado
     st.header("Comparación de Modelos de Turbulencia")
-    st.info("Comparativa directa entre los modelos para altas velocidades.")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader("Modelo k-epsilon")
-        st.video("epsilon 18_2.mp4") # Reemplaza con tus nombres reales
-        
-    with col2:
-        st.subheader("Modelo k-omega")
-        st.video("omega18_2.mp4") # Reemplaza con tus nombres reales
+    st.info("Comparativa directa: Modelo k-epsilon (izq.) vs Modelo k-omega (der.)")
+     
+    st.video("Comparación modelo k-ep_k-om.mp4") 
 
 else:
     # Si la casilla NO está marcada, mostramos la vista individual
     st.header("Visualización Individual")
     
+        
     # Diccionario con las opciones
     modelos_videos = {
         "Modelo k-epsilon - Velocidad Baja": "epsilon 10_2.mp4",
