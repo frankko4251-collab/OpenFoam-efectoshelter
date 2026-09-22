@@ -53,3 +53,29 @@ else:
     
     archivo_a_mostrar = modelos_videos[opcion_seleccionada]
     st.video(archivo_a_mostrar)
+
+import streamlit.components.v1 as components
+import base64
+
+st.header("Geometría del Dominio 🌳")
+st.info("Interactúa con la maqueta 3D de los setos y viñedos. Gira y haz zoom para explorar.")
+
+# 1. Leemos el archivo 3D y lo codificamos para la web
+with open("buildings.glb", "rb") as f:
+    datos_3d = f.read()
+    b64_3d = base64.b64encode(datos_3d).decode("utf-8")
+
+# 2. Creamos el visor interactivo (model-viewer)
+codigo_html = f'''
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+<model-viewer 
+    src="data:model/gltf-binary;base64,{b64_3d}" 
+    auto-rotate 
+    camera-controls 
+    shadow-intensity="1"
+    style="width: 100%; height: 500px; background-color: #f4f4f4; border-radius: 10px;">
+</model-viewer>
+'''
+
+# 3. Lo mostramos en la página de Streamlit
+components.html(codigo_html, height=520)
