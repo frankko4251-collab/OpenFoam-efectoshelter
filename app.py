@@ -57,25 +57,67 @@ else:
 import streamlit.components.v1 as components
 import base64
 
-st.header("Geometría del Dominio 🌳")
-st.info("Interactúa con la maqueta 3D de los setos y viñedos. Gira y haz zoom para explorar.")
+st.header("Geometría del Dominio")
+st.info("Interactúa con la maqueta 3D. Gira y haz zoom para explorar.")
 
-# 1. Leemos el archivo 3D y lo codificamos para la web
+# 1. Creamos el interruptor
+ver_cotas = st.toggle("Mostrar cotas y medidas", value=True)
+
+# 2. Lógica para ocultar o mostrar
+visibilidad_cotas = "block" if ver_cotas else "none"
+
+# 3. Leemos tu archivo 3D (asegúrate de que el nombre sea el correcto, aquí dejé maqueta.glb)
 with open("buildings.glb", "rb") as f:
     datos_3d = f.read()
     b64_3d = base64.b64encode(datos_3d).decode("utf-8")
 
-# 2. Creamos el visor interactivo (model-viewer)
+# 4. Inyectamos el visor con tus coordenadas exactas
 codigo_html = f'''
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
+<style>
+  /* Quitamos el fondo del botón para que no se vea un círculo gris */
+  .Hotspot {{
+    border: none;
+    background: none;
+  }}
+  
+  /* Le damos estilo al cartelito blanco de la cota */
+  .HotspotAnnotation {{
+    display: {visibilidad_cotas}; /* Aquí se conecta con el interruptor de Streamlit */
+    background: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    border: 1px solid #ccc;
+  }}
+</style>
+
 <model-viewer 
     src="data:model/gltf-binary;base64,{b64_3d}" 
     auto-rotate 
     camera-controls 
     shadow-intensity="1"
     style="width: 100%; height: 500px; background-color: #f4f4f4; border-radius: 10px;">
+    
+    <!-- Cota 1: Altura 6.6m -->
+    <button class="Hotspot" slot="hotspot-2" data-position="-8.284491645009238m 2.856832355316076m 6.9725749521763305m" data-normal="0.20547094633143412m -0.3993009764151941m 0.8934989761871793m">
+        <div class="HotspotAnnotation">Altura 6.6 m</div>
+    </button>
+    
+    <!-- Cota 2: Altura 1.2m -->
+    <button class="Hotspot" slot="hotspot-4" data-position="5.9664710343985945m 2.9266600608825684m 1.171391566237828m" data-normal="0m -1m 0m">
+        <div class="HotspotAnnotation">Altura 1.2 m</div>
+    </button>
+    
+    <!-- Cota 3: Altura 6m -->
+    <button class="Hotspot" slot="hotspot-7" data-position="-9.5119758273059m 0.2637165148610574m 6.196090438763218m" data-normal="-0.384493833891953m -0.14521766241229278m 0.911633875096015m">
+        <div class="HotspotAnnotation">Altura 6 m</div>
+    </button>
+
 </model-viewer>
 '''
 
-# 3. Lo mostramos en la página de Streamlit
-components.html(codigo_html, height=520)
+# 5. Mostramos en pantalla
+components.html(codigo_html, height=550)
