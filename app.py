@@ -61,14 +61,7 @@ def graficar_estela(df, velocidad, titulo):
         altura_vinedo = 1.2   # Altura de las vides
         
         # Dibujamos un rectángulo verde semitransparente para representar el cultivo
-        #figura.add_shape(
-         #   type="rect",
-          #  x0=inicio_vinedo, x1=fin_vinedo, y0=0, y1=altura_vinedo,
-           # fillcolor="rgba(34, 139, 34, 0.2)", # Verde suave
-            #line_width=1,
-            #line_color="rgba(34, 139, 34, 0.5)",
-            #layer="below"
-        )
+        
         
         # Trazo invisible solo para que el "Viñedo" aparezca en la leyenda
         figura.add_trace(go.Scatter(
