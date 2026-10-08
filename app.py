@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit.components.v1 as components
 import base64
+import plotly.graph_objects as go
 
 # Configuración básica
 st.set_page_config(page_title="Investigación OpenFOAM", layout="wide")
@@ -21,19 +22,67 @@ def graficar_estela(df, velocidad, titulo):
         # Agrupamos por cada distancia X y buscamos la altura máxima
         curva_estela = zona_estela.groupby('X_rel')['z'].max().reset_index()
         
-        # Dibujamos la gráfica interactiva
+        # 1. Dibujamos la gráfica base
         figura = px.line(
             curva_estela, 
             x='X_rel', 
             y='z', 
             title=titulo,
-            labels={'X_rel': 'Distancia aguas abajo (m)', 'z': 'Altura de protección (m)'}
+            labels={'X_rel': 'Distancia aguas abajo (m)', 'z': 'Altura (m)'}
         )
         
-        # Estilo tipo paper científico
-        figura.update_traces(fill='tozeroy', line_color='#1f77b4', fillcolor='rgba(31, 119, 180, 0.15)')
-        figura.add_shape(type="line", x0=0, y0=0, x1=0, y1=6.6, line=dict(color="black", width=4))
+        # 2. Replicamos el estilo "escalonado" y el sombreado
+        figura.update_traces(
+            fill='tozeroy', 
+            line_color='#1f77b4', 
+            fillcolor='rgba(31, 119, 180, 0.15)',
+            line_shape='vh', # Esto genera el efecto escalonado de tu gráfica original
+            name=f'Estela (U = {velocidad} m/s)',
+            showlegend=True
+        )
+        
+        # 3. Mover el "cero" a la derecha configurando el rango del eje X
+        max_x = curva_estela['X_rel'].max()
+        # El eje empieza en -5 y termina un poco después del último punto
+        figura.update_xaxes(range=[-5, max_x + 5]) 
+        
+        # 4. Agregar la Cortina Forestal
+        figura.add_trace(go.Scatter(
+            x=[0, 0], 
+            y=[0, 6.6], 
+            mode="lines", 
+            line=dict(color="black", width=5),
+            name="Cortina Forestal"
+        ))
+        
+        # 5. Agregar el Viñedo (Ajusta estos valores con tus medidas reales)
+        inicio_vinedo = 12.0  # A cuántos metros de la cortina empieza el viñedo
+        fin_vinedo = 60.0     # A cuántos metros termina
+        altura_vinedo = 1.2   # Altura de las vides
+        
+        # Dibujamos un rectángulo verde semitransparente para representar el cultivo
+        #figura.add_shape(
+         #   type="rect",
+          #  x0=inicio_vinedo, x1=fin_vinedo, y0=0, y1=altura_vinedo,
+           # fillcolor="rgba(34, 139, 34, 0.2)", # Verde suave
+            #line_width=1,
+            #line_color="rgba(34, 139, 34, 0.5)",
+            #layer="below"
+        )
+        
+        # Trazo invisible solo para que el "Viñedo" aparezca en la leyenda
+        figura.add_trace(go.Scatter(
+            x=[inicio_vinedo, fin_vinedo], y=[0, 0], 
+            mode="lines",
+            line=dict(color="rgba(34, 139, 34, 0.5)", width=4),
+            name="Zona de Viñedo"
+        ))
+        
+        # Ajustes finales de formato
         figura.update_yaxes(rangemode="tozero")
+        figura.update_layout(
+            legend=dict(yanchor="top", y=0.99, xanchor="right", x=0.99, bgcolor="rgba(255,255,255,0.8)")
+        )
         
         st.plotly_chart(figura, use_container_width=True)
     else:
