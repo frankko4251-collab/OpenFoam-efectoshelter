@@ -51,7 +51,7 @@ def graficar_estela(df, velocidad, titulo):
             x=[0, 0], 
             y=[0, 6.6], 
             mode="lines", 
-            line=dict(color="black", width=5),
+            line=dict(color="grey", width=5),
             name="Cortina Forestal"
         ))
         
@@ -61,7 +61,14 @@ def graficar_estela(df, velocidad, titulo):
         altura_vinedo = 1.2   # Altura de las vides
         
         # Dibujamos un rectángulo verde semitransparente para representar el cultivo
-        
+        figura.add_shape(
+            type="rect",
+            x0=inicio_vinedo, x1=fin_vinedo, y0=0, y1=altura_vinedo,
+            fillcolor="rgba(34, 139, 34, 0.2)", # Verde suave
+            line_width=1,
+            line_color="rgba(34, 139, 34, 0.5)",
+            layer="below"
+        )
         
         # Trazo invisible solo para que el "Viñedo" aparezca en la leyenda
         figura.add_trace(go.Scatter(
@@ -91,7 +98,7 @@ with col_logo2:
     st.image("Logo Iemi.png", use_container_width=True)
 # ------------------------------
 
-st.title("Simulaciones CFD con OpenFOAM 💨")
+st.title("Simulaciones CFD con OpenFOAM")
 st.write("Visualización interactiva de resultados de investigación en dinámica de fluidos.")
 
 # Creamos la casilla de verificación
@@ -108,7 +115,7 @@ if modo_comparacion:
     
     # Gráficas interactivas en dos columnas (Asumimos que la comparativa es a velocidad alta 18m/s)
     st.divider()
-    st.subheader("Análisis Interactivo de la Estela Protectora 📊")
+    st.subheader("Análisis Interactivo de la Estela Protectora ")
     velocidad_elegida = st.slider("Velocidad límite de protección (m/s):", min_value=1.0, max_value=8.0, value=3.8, step=0.1, key="slider_comp")
     
     col_graf1, col_graf2 = st.columns(2)
@@ -153,7 +160,7 @@ else:
 st.divider()
 
 # --- GEOMETRÍA 3D ---
-st.header("Geometría del Dominio 🌳")
+st.header("Geometría del Dominio")
 st.info("Interactúa con la maqueta 3D. Gira y haz zoom para explorar.")
 
 ver_cotas = st.toggle("Mostrar cotas y medidas", value=True)
