@@ -56,8 +56,8 @@ def graficar_estela(df, velocidad, titulo):
         ))
         
         # 5. Agregar el Viñedo (Ajusta estos valores con tus medidas reales)
-        inicio_vinedo = 12.0  # A cuántos metros de la cortina empieza el viñedo
-        fin_vinedo = 60.0     # A cuántos metros termina
+        inicio_vinedo = 9.3  # A cuántos metros de la cortina empieza el viñedo
+        fin_vinedo = 19.0     # A cuántos metros termina
         altura_vinedo = 1.2   # Altura de las vides
         
         # Dibujamos un rectángulo verde semitransparente para representar el cultivo
